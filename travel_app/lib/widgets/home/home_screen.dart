@@ -1,104 +1,55 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:travel_app/widgets/home/widgets/CategoriesScreen.dart';
+import 'package:travel_app/widgets/home/widgets/home_bottom_navigation_bar.dart';
 import 'package:travel_app/widgets/home/widgets/leading.dart';
+import 'package:travel_app/widgets/home/widgets/popular_screen.dart';
+import 'package:travel_app/widgets/home/widgets/recommended.dart';
 import 'package:travel_app/widgets/home/widgets/search-home.dart';
-import 'package:travel_app/widgets/home/models/category.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-   final List<Categories> categories = [
-    const Categories(
-      id: 1,
-      name: 'Location',
-      active: true,
-    ),
-     const Categories(
-       id: 2,
-       name: 'Hotels',
-       active: false,
-     ),
-     const Categories(
-       id: 3,
-       name: 'Food',
-       active: false,
-     ),
-     const Categories(
-       id: 4,
-       name: 'Adventure',
-       active: false,
-     ),
-     const Categories(
-       id: 5,
-       name: 'Adventure',
-       active: false,
-     )
-  ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Column(
         children: [
-          const SizedBox(
+          SizedBox(
             height: 44,
           ),
           HeaderHome(),
-          const SizedBox(
+          SizedBox(
             height: 24,
           ),
-          Searchhome(),
-          const SizedBox(
+          SearchHome(),
+          SizedBox(
             height: 32,
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 20),
-            child: Container(
-              height: 41,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: GestureDetector(
-                      onTap: () => _onCategoryTap(index),
-                      child: Container(
-                        width: 89,
-                        height: 41,
-                        decoration: categories[index].active == true ? BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: const Color(0xFF5493F1).withOpacity(0.1)
-                        ) : BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.transparent
-                        ),
-                        child: Center(child: Text('${categories[index].name}',style: TextStyle(color: categories[index].active == true ? Color(0xFF1154E6) : Colors.grey,fontSize: 16,fontWeight: FontWeight.w600),)),
-                      ),
-                    ),
-                  );
-                },
+          CategoriesScreen(),
+          SizedBox(
+            height: 32,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // đang hot
+                  PopularScreen(),
+                  SizedBox(height: 32,),
+                  // khuyến khích
+                  RecommendedScreen(),
+                ],
               ),
             ),
-          )
+          ),
         ],
       ),
+      bottomNavigationBar: HomeBottomNavigationBar()
     );
   }
-   void _onCategoryTap(int index) {
-     setState(() {
-       for (int i = 0; i < categories.length; i++) {
-         categories[i] = categories[i].copyWith(active: i == index);
-       }
-     });
-   }
-
-
 }

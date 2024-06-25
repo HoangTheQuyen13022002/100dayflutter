@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/widgets/home/home_screen.dart';
 import 'package:travel_app/widgets/onboard.dart';
 
 void main() {
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: Onboard(),
     );
   }
 }

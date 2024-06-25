@@ -1,9 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class Searchhome extends StatelessWidget {
-  const Searchhome({super.key});
+class SearchHome extends StatelessWidget {
+  const SearchHome({super.key});
 
   @override
   Widget build(BuildContext context) {
